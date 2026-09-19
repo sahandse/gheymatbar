@@ -3,7 +3,7 @@
  * Plugin Name: قیمت‌بار
  * Plugin URI: https://github.com/sahandse/gheymatbar
  * Description: نمایش قیمت طلا، سکه، ارز و رمزارز با شورت‌کدهای مجزا، تم‌های قابل تنظیم و رابط فارسی.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Sahand Rezvan
  * Author URI: https://github.com/sahandse
  * Text Domain: gheymatbar
@@ -14,7 +14,7 @@
 defined('ABSPATH') || exit;
 
 final class Gheymatbar_Plugin {
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
     const OPTION  = 'gheymatbar_settings';
 
     public function __construct() {
@@ -58,6 +58,10 @@ final class Gheymatbar_Plugin {
     }
 
     public function admin_menu() {
+        if (function_exists('s_store_register_submenu')) {
+            s_store_register_submenu('gheymatbar', 'قیمت‌بار', [$this, 'settings_page'], 'manage_options', 'قیمت‌بار');
+            return;
+        }
         add_menu_page(
             'قیمت‌بار',
             'قیمت‌بار',
